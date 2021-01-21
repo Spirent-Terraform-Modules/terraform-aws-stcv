@@ -5,7 +5,7 @@ variable "ami" {
 }
 
 variable "vpc_id" {
-  description = "AWS VPC ID"
+  description = "AWS vpc id"
   type        = string
   default     = ""
 }
