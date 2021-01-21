@@ -1,0 +1,4 @@
+#cloud-config
+spirent:
+  driver: dpdk
+  speed: 10G

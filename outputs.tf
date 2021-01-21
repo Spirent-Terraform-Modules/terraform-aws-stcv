@@ -1,22 +1,20 @@
-# OUTPUTS
-
 output "stcv_ami" {
   description = "Latest Sprient TestCenter Virtual Pulic AMI"
   value       = data.aws_ami.stcv.id
 }
 
-output "id" {
-  description = "List of IDs of instances"
+output "instance_ids" {
+  description = "List of instance IDs"
   value       = aws_instance.stcv.*.id
 }
 
 
-output "public_ip" {
+output "instance_public_ips" {
   description = "List of public IP addresses assigned to the instances, if applicable"
   value       = aws_instance.stcv.*.public_ip
 }
 
-output "private_ip" {
+output "instance_private_ips" {
   description = "List of private IP addresses assigned to the instances, if applicable"
   value       = aws_instance.stcv.*.private_ip
 }

@@ -22,7 +22,7 @@ No input.
 
 | Name | Description |
 |------|-------------|
-| public\_ip | n/a |
+| instance\_public\_ips | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

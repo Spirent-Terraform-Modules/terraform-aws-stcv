@@ -45,7 +45,7 @@ resource "aws_security_group" "stcv_mgmt_plane" {
     cidr_blocks = var.ingress_cidr_blocks
   }
 
-  # STCv to GUI/BLL 
+  # STCv to GUI/BLL
   egress {
     from_port   = 49100
     to_port     = 65535
@@ -75,7 +75,7 @@ resource "aws_instance" "stcv" {
   user_data              = data.template_file.user_data.rendered
 
   tags = {
-    Name = format("%s%d", var.instance_name, 1 + count.index)
+    Name = format("%s%d", var.instance_name_prefix, 1 + count.index)
   }
 }
 
@@ -85,7 +85,7 @@ locals {
 
 
 # Create test network interfaces for each instance
-# Each instance will transimt and receive traffic on each test network 
+# Each instance will transmit and receive traffic on each test network
 resource "aws_network_interface" "test_plane" {
   count     = var.instance_count * local.test_plane_subnet_count
   subnet_id = var.test_plane_subnets[floor(count.index / var.instance_count)]
