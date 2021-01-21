@@ -1,6 +1,6 @@
 
 # find latest public Spirent TestCenter Virtual AMI
-data "aws_ami" "spirent_ami" {
+data "aws_ami" "stcv" {
   owners           = ["679593333241"]
   most_recent      = true
   executable_users = ["all"]
@@ -15,9 +15,11 @@ data "template_file" "user_data" {
   template = file(var.user_data_file)
 }
 
-resource "aws_security_group" "stcv_mgmt" {
-  name        = "stcv-mgmt"
+resource "aws_security_group" "stcv_mgmt_plane" {
+  name        = "stcv-mgmt-plane"
   description = "TestCenter Security Group"
+
+  vpc_id = var.vpc_id
 
   # STC app
   ingress {
@@ -64,13 +66,12 @@ resource "aws_security_group" "stcv_mgmt" {
 # create STCv
 resource "aws_instance" "stcv" {
   count         = var.instance_count
-  ami           = var.ami != "" ? var.ami : data.aws_ami.spirent_ami.id
+  ami           = var.ami != "" ? var.ami : data.aws_ami.stcv.id
   instance_type = var.instance_type
-  # availability_zone = var.availability_zone
-  subnet_id = var.subnet_id
-  key_name  = var.key_name
+  subnet_id     = var.mgmt_plane_subnet
+  key_name      = var.key_name
 
-  vpc_security_group_ids = [aws_security_group.stcv_mgmt.id]
+  vpc_security_group_ids = [aws_security_group.stcv_mgmt_plane.id]
   user_data              = data.template_file.user_data.rendered
 
   tags = {
@@ -79,15 +80,15 @@ resource "aws_instance" "stcv" {
 }
 
 locals {
-  test_subnet_count = length(var.test_subnet_ids)
+  test_plane_subnet_count = length(var.test_plane_subnets)
 }
 
 
 # Create test network interfaces for each instance
 # Each instance will transimt and receive traffic on each test network 
-resource "aws_network_interface" "test" {
-  count     = var.instance_count * local.test_subnet_count
-  subnet_id = var.test_subnet_ids[floor(count.index / var.instance_count)]
+resource "aws_network_interface" "test_plane" {
+  count     = var.instance_count * local.test_plane_subnet_count
+  subnet_id = var.test_plane_subnets[floor(count.index / var.instance_count)]
   attachment {
     instance     = aws_instance.stcv[count.index % var.instance_count].id
     device_index = 1 + floor(count.index / var.instance_count)

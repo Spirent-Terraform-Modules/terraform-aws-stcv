@@ -1,8 +1,8 @@
 # OUTPUTS
 
-output "spirent_ami" {
+output "stcv_ami" {
   description = "Latest Sprient TestCenter Virtual Pulic AMI"
-  value       = data.aws_ami.spirent_ami.id
+  value       = data.aws_ami.stcv.id
 }
 
 output "id" {

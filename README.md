@@ -24,13 +24,14 @@ Instances can be controlled by the Spirent TestCenter application.
 |------|-------------|------|---------|:--------:|
 | ami | The Spirent TestCenter Virtual AMI. When not specified, the latest marketplace image will be used. | `string` | `""` | no |
 | ingress\_cidr\_blocks | List of management interface ingress IPv4/IPv6 CIDR ranges. | `list(string)` | n/a | yes |
-| instance\_count | Number of instances to create. | `number` | `2` | no |
+| instance\_count | Number of instances to create | `number` | `2` | no |
 | instance\_name | Name assigned to the instance.  An instance number will be appended to the name. | `string` | `"stcv-"` | no |
-| instance\_type | AWS instance type. | `string` | `"m5.large"` | no |
+| instance\_type | AWS instance type | `string` | `"m5.large"` | no |
 | key\_name | AWS SSH key name to assign to the instance. | `string` | n/a | yes |
-| subnet\_id | Management public AWS subnet id. | `any` | n/a | yes |
-| test\_subnet\_ids | Test network AWS subnet id list.  Each instance will have a network interface on each subnet. | `list(string)` | n/a | yes |
+| mgmt\_plane\_subnet | Management public AWS subnet id | `string` | n/a | yes |
+| test\_plane\_subnets | Test network AWS subnet id list.  Each instance will have a network interface on each subnet. | `list(string)` | n/a | yes |
 | user\_data\_file | File path name containing AWS user data for the instance.  Spirent TestCenter Virtual cloud-init configuration parameters are supported. | `string` | n/a | yes |
+| vpc\_id | AWS VPC ID | `string` | `""` | no |
 
 ## Outputs
 
@@ -39,7 +40,7 @@ Instances can be controlled by the Spirent TestCenter application.
 | id | List of IDs of instances |
 | private\_ip | List of private IP addresses assigned to the instances, if applicable |
 | public\_ip | List of public IP addresses assigned to the instances, if applicable |
-| spirent\_ami | Latest Sprient TestCenter Virtual Pulic AMI |
+| stcv\_ami | Latest Sprient TestCenter Virtual Pulic AMI |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

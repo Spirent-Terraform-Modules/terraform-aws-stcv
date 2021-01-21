@@ -4,6 +4,12 @@ variable "ami" {
   default     = ""
 }
 
+variable "vpc_id" {
+  description = "AWS VPC ID"
+  type        = string
+  default     = ""
+}
+
 variable "instance_name" {
   description = "Name assigned to the instance.  An instance number will be appended to the name."
   type        = string
@@ -11,19 +17,20 @@ variable "instance_name" {
 }
 
 variable "instance_count" {
-  description = "Number of instances to create."
+  description = "Number of instances to create"
   type        = number
   default     = 2
 }
 
 variable "instance_type" {
-  description = "AWS instance type."
+  description = "AWS instance type"
   type        = string
   default     = "m5.large"
 }
 
-variable "subnet_id" {
-  description = "Management public AWS subnet id."
+variable "mgmt_plane_subnet" {
+  description = "Management public AWS subnet id"
+  type        = string
 }
 
 variable "ingress_cidr_blocks" {
@@ -31,7 +38,7 @@ variable "ingress_cidr_blocks" {
   type        = list(string)
 }
 
-variable "test_subnet_ids" {
+variable "test_plane_subnets" {
   description = "Test network AWS subnet id list.  Each instance will have a network interface on each subnet."
   type        = list(string)
 }

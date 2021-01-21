@@ -1,5 +1,6 @@
 
-Run 2 Spirent TestCenter Virtual traffic generator instances with public and test networks.
+Create a VPC with public and private subnets and run 2 Spirent TestCenter Virtual traffic generator instances.
+
 
 Instances can be controlled by the Spirent TestCenter application.
 
@@ -10,9 +11,7 @@ No requirements.
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| aws | n/a |
+No provider.
 
 ## Inputs
 
