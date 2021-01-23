@@ -2,12 +2,21 @@ variable "ami" {
   description = "The Spirent TestCenter Virtual AMI. When not specified, the latest marketplace image will be used."
   type        = string
   default     = ""
+
+  validation {
+    condition     = var.ami == "" || can(regex("^ami-", var.ami))
+    error_message = "Please provide a valid ami id, starting with \"ami-\". or leave blank for latest Spirent TestCenter Virtual AMI."
+  }
 }
 
 variable "vpc_id" {
   description = "AWS VPC ID"
   type        = string
-  default     = ""
+
+  validation {
+    condition     = can(regex("^vpc-", var.vpc_id))
+    error_message = "Please provide a valid vpc id, starting with \"vpc-\"."
+  }
 }
 
 variable "instance_name_prefix" {
@@ -31,6 +40,11 @@ variable "instance_type" {
 variable "mgmt_plane_subnet" {
   description = "Management public AWS subnet ID"
   type        = string
+
+  validation {
+    condition     = can(regex("^subnet-", var.mgmt_plane_subnet))
+    error_message = "Please provide a valid subnet id, starting with \"subnet-\"."
+  }
 }
 
 variable "ingress_cidr_blocks" {
