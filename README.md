@@ -31,7 +31,7 @@ Instances can be controlled by the Spirent TestCenter application.
 | mgmt\_plane\_subnet | Management public AWS subnet ID | `string` | n/a | yes |
 | test\_plane\_subnets | Test plane AWS subnet ID list.  Each instance will have a network interface on each subnet. | `list(string)` | n/a | yes |
 | user\_data\_file | File path name containing AWS user data for the instance.  Spirent TestCenter Virtual cloud-init configuration parameters are supported. | `string` | n/a | yes |
-| vpc\_id | AWS VPC ID | `string` | `""` | no |
+| vpc\_id | AWS VPC ID | `string` | n/a | yes |
 
 ## Outputs
 

@@ -27,7 +27,7 @@ module "stcv" {
   mgmt_plane_subnet  = module.vpc.public_subnets[0]
   test_plane_subnets = module.vpc.private_subnets
 
-  # Warning: Using all address cidr block to simplify the example. You should restrict addresses to your public network.
+  # Warning: Using all address cidr block to simplify the example. You should limit instance access.
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
   key_name       = "stcv_dev_key"
