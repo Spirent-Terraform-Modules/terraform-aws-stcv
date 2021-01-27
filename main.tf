@@ -90,11 +90,14 @@ resource "aws_instance" "stcv" {
   count         = var.instance_count
   ami           = var.ami != "" ? var.ami : data.aws_ami.stcv.id
   instance_type = var.instance_type
-  subnet_id     = var.mgmt_plane_subnet
   key_name      = var.key_name
 
-  vpc_security_group_ids = [aws_security_group.stcv_mgmt_plane.id]
-  user_data              = data.template_file.user_data.rendered
+  user_data = data.template_file.user_data.rendered
+
+  network_interface {
+    network_interface_id = aws_network_interface.mgmt_plane[count.index].id
+    device_index         = 0
+  }
 
   tags = {
     Name = format("%s%d", var.instance_name_prefix, 1 + count.index)
@@ -105,6 +108,17 @@ locals {
   test_plane_subnet_count = length(var.test_plane_subnets)
 }
 
+resource "aws_network_interface" "mgmt_plane" {
+  count           = var.instance_count
+  subnet_id       = var.mgmt_plane_subnet
+  security_groups = [aws_security_group.stcv_mgmt_plane.id]
+}
+
+resource "aws_eip_association" "mgmt_plane" {
+  count                = length(var.mgmt_plane_eips)
+  network_interface_id = aws_network_interface.mgmt_plane[count.index].id
+  allocation_id        = var.mgmt_plane_eips[count.index]
+}
 
 # Create test network interfaces for each instance
 # Each instance will transmit and receive traffic on each test network

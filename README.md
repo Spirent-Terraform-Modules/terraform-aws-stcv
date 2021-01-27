@@ -30,6 +30,7 @@ Instances can be controlled by the Spirent TestCenter application.
 | instance\_name\_prefix | Name assigned to the instance.  An instance number will be appended to the name. | `string` | `"stcv-"` | no |
 | instance\_type | AWS instance type | `string` | `"m5.large"` | no |
 | key\_name | AWS SSH key name to assign to each instance | `string` | n/a | yes |
+| mgmt\_plane\_eips | List of management plane elastic IP IDs.  Leave empty if subnet auto assigns IPs. | `list(string)` | `[]` | no |
 | mgmt\_plane\_subnet | Management public AWS subnet ID | `string` | n/a | yes |
 | test\_plane\_subnets | Test plane AWS subnet ID list.  Each instance will have a network interface on each subnet. | `list(string)` | n/a | yes |
 | user\_data\_file | File path name containing AWS user data for the instance.  Spirent TestCenter Virtual cloud-init configuration parameters are supported. | `string` | n/a | yes |
