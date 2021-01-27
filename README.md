@@ -1,4 +1,6 @@
+# Spirent TestCenter Virtual Terraform
 
+## Description
 Run STCv traffic generator instances with public and test networks.
 
 Instances can be controlled by the Spirent TestCenter application.
@@ -40,7 +42,7 @@ Instances can be controlled by the Spirent TestCenter application.
 | instance\_ids | List of instance IDs |
 | instance\_private\_ips | List of private IP addresses assigned to the instances, if applicable |
 | instance\_public\_ips | List of public IP addresses assigned to the instances, if applicable |
-| stcv\_ami | Latest Sprient TestCenter Virtual Pulic AMI |
+| stcv\_ami | Latest Sprient TestCenter Virtual public AMI |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

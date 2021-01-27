@@ -1,5 +1,5 @@
 output "stcv_ami" {
-  description = "Latest Sprient TestCenter Virtual Pulic AMI"
+  description = "Latest Sprient TestCenter Virtual public AMI"
   value       = data.aws_ami.stcv.id
 }
 
