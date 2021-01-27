@@ -17,7 +17,7 @@ data "template_file" "user_data" {
 
 resource "aws_security_group" "stcv_mgmt_plane" {
   name        = "stcv-mgmt-plane"
-  description = "TestCenter Security Group"
+  description = "TestCenter Security Group for management plane traffic"
 
   vpc_id = var.vpc_id
 
@@ -63,6 +63,28 @@ resource "aws_security_group" "stcv_mgmt_plane" {
 
 }
 
+resource "aws_security_group" "stcv_test_plane" {
+  name        = "stcv-test-plane"
+  description = "TestCenter Security Group for test plane traffic"
+
+  vpc_id = var.vpc_id
+
+  # STC test plane traffic
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 # create STCv
 resource "aws_instance" "stcv" {
   count         = var.instance_count
@@ -87,8 +109,10 @@ locals {
 # Create test network interfaces for each instance
 # Each instance will transmit and receive traffic on each test network
 resource "aws_network_interface" "test_plane" {
-  count     = var.instance_count * local.test_plane_subnet_count
-  subnet_id = var.test_plane_subnets[floor(count.index / var.instance_count)]
+  count           = var.instance_count * local.test_plane_subnet_count
+  subnet_id       = var.test_plane_subnets[floor(count.index / var.instance_count)]
+  security_groups = [aws_security_group.stcv_test_plane.id]
+
   attachment {
     instance     = aws_instance.stcv[count.index % var.instance_count].id
     device_index = 1 + floor(count.index / var.instance_count)
