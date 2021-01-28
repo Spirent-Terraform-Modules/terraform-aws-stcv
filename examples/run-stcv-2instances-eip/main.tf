@@ -1,10 +1,9 @@
 provider "aws" {
-  region = "us-west-2"
+  region = "us-east-1"
 }
 
 data "aws_vpc" "default" {
-  id = "vpc-0cf017e5acf05d8e2"
-  # default = true
+  default = true
 }
 
 variable "instance_count" {
