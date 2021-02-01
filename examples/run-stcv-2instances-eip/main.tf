@@ -34,7 +34,6 @@ data "aws_eip" "eip2" {
   }
 }
 
-
 variable "instance_count" {
   description = "Number of instances to create"
   type        = number
@@ -50,7 +49,7 @@ variable "instance_count" {
 module "stcv" {
   source            = "../.."
   vpc_id            = data.aws_vpc.default.id
-  instance_count    = 2
+  instance_count    = var.instance_count
   mgmt_plane_subnet = data.aws_subnet.mgmt_plane.id
   mgmt_plane_eips   = [data.aws_eip.eip1.id, data.aws_eip.eip2.id]
   # mgmt_plane_eips = aws_eip.stcv.*.id
