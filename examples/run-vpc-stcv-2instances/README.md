@@ -7,7 +7,10 @@ Instances can be controlled by the Spirent TestCenter application.
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| terraform | >= 0.13.0 |
+| aws | >= 2.65 |
 
 ## Providers
 
