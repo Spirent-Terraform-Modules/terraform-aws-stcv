@@ -105,12 +105,12 @@ resource "aws_instance" "stcv" {
 }
 
 locals {
-  test_plane_subnet_count = length(var.test_plane_subnets)
+  test_plane_subnet_count = length(var.test_plane_subnet_ids)
 }
 
 resource "aws_network_interface" "mgmt_plane" {
   count           = var.instance_count
-  subnet_id       = var.mgmt_plane_subnet
+  subnet_id       = var.mgmt_plane_subnet_id
   security_groups = [aws_security_group.stcv_mgmt_plane.id]
 }
 
@@ -124,7 +124,7 @@ resource "aws_eip_association" "mgmt_plane" {
 # Each instance will transmit and receive traffic on each test network
 resource "aws_network_interface" "test_plane" {
   count           = var.instance_count * local.test_plane_subnet_count
-  subnet_id       = var.test_plane_subnets[floor(count.index / var.instance_count)]
+  subnet_id       = var.test_plane_subnet_ids[floor(count.index / var.instance_count)]
   security_groups = [aws_security_group.stcv_test_plane.id]
 
   attachment {

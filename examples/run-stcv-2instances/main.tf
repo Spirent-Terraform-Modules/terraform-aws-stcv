@@ -1,28 +1,57 @@
 
 provider "aws" {
-  region = "us-east-1"
+  region = var.region
 }
 
-data "aws_vpc" "default" {
-  default = true
+variable "region" {
+  description = "AWS region"
+  default     = "us-west-2"
 }
+
+variable "vpc_id" {
+  description = "VPC ID"
+  default     = "vpc-123456789"
+}
+
+variable "mgmt_plane_subnet_id" {
+  description = "Management plane subnet ID"
+  default     = "subnet-123456789"
+}
+
+variable "test_plane_subnet_id" {
+  description = "Test plane subnet ID"
+  default     = "subnet-123456789"
+}
+
+variable "instance_count" {
+  description = "Number of instances to create"
+  type        = number
+  default     = 2
+}
+
+variable "key_name" {
+  description = "SSH key name"
+  default     = "bootstrap_key"
+}
+
 
 module "stcv" {
   source = "../.."
 
-  vpc_id         = data.aws_vpc.default.id
-  instance_count = 2
+  vpc_id         = var.vpc_id
+  instance_count = var.instance_count
 
-  mgmt_plane_subnet  = "subnet-ffe75cb2"
-  test_plane_subnets = ["subnet-08766a2cc62ba63bc"]
-  # Warning: Using all adddress cidr block to simplify the example. You should limit instance access.
+  mgmt_plane_subnet_id  = var.mgmt_plane_subnet_id
+  test_plane_subnet_ids = [var.test_plane_subnet_id]
+
+  # Warning: Using all address cidr block to simplify the example. You should limit instance access.
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
-  key_name       = "stcv_dev_key"
+  key_name       = var.key_name
   user_data_file = "../../cloud-init.yaml"
 }
 
 output "instance_public_ips" {
-  value = module.stcv.*.instance_public_ips
+  description = "List of public IP addresses assigned to the instances, if applicable"
+  value       = module.stcv.*.instance_public_ips
 }
-

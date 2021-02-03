@@ -1,43 +1,46 @@
 provider "aws" {
-  region = "us-west-2"
+  region = var.region
 }
 
-data "aws_vpc" "default" {
-  tags = {
-    ExampleName = "vpc1"
-  }
+variable "region" {
+  description = "AWS region"
+  default     = "us-west-2"
 }
 
-data "aws_subnet" "mgmt_plane" {
-  vpc_id = data.aws_vpc.default.id
-  tags = {
-    ExampleName = "mgmt_plane"
-  }
+variable "vpc_id" {
+  description = "VPC ID"
+  default     = "vpc-123456789"
 }
 
-data "aws_subnet" "test_plane1" {
-  vpc_id = data.aws_vpc.default.id
-  tags = {
-    ExampleName = "test_plane1"
-  }
+variable "mgmt_plane_subnet_id" {
+  description = "Management plane subnet ID"
+  default     = "subnet-123456789"
 }
 
-data "aws_eip" "eip1" {
-  tags = {
-    ExampleName = "eip1"
-  }
+variable "test_plane_subnet_id" {
+  description = "Test plane subnet ID"
+  default     = "subnet-123456789"
 }
 
-data "aws_eip" "eip2" {
-  tags = {
-    ExampleName = "eip2"
-  }
+variable "eip_id1" {
+  description = "Instance 1 Elastic IP ID"
+  default     = "eipalloc-123456789"
+}
+
+variable "eip_id2" {
+  description = "Instance 2 Elastic IP ID"
+  default     = "eipalloc-123456789"
 }
 
 variable "instance_count" {
   description = "Number of instances to create"
   type        = number
   default     = 2
+}
+
+variable "key_name" {
+  description = "SSH key name"
+  default     = "bootstrap_key"
 }
 
 # Example: Allocate elastic IPs
@@ -47,19 +50,21 @@ variable "instance_count" {
 # }
 
 module "stcv" {
-  source            = "../.."
-  vpc_id            = data.aws_vpc.default.id
-  instance_count    = var.instance_count
-  mgmt_plane_subnet = data.aws_subnet.mgmt_plane.id
-  mgmt_plane_eips   = [data.aws_eip.eip1.id, data.aws_eip.eip2.id]
+  source               = "../.."
+  vpc_id               = var.vpc_id
+  instance_count       = var.instance_count
+  mgmt_plane_subnet_id = var.mgmt_plane_subnet_id
+  mgmt_plane_eips      = [var.eip_id1, var.eip_id2]
   # mgmt_plane_eips = aws_eip.stcv.*.id
-  test_plane_subnets = [data.aws_subnet.test_plane1.id]
-  # Warning: Using all adddress cidr block to simplify the example. You should limit instance access.
+  test_plane_subnet_ids = [var.test_plane_subnet_id]
+
+  # Warning: Using all address cidr block to simplify the example. You should limit instance access.
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  key_name            = "spirent_ec2"
+  key_name            = var.key_name
   user_data_file      = "../../cloud-init.yaml"
 }
 
 output "instance_public_ips" {
-  value = module.stcv.instance_public_ips
+  description = "List of public IP addresses assigned to the instances, if applicable"
+  value       = module.stcv.instance_public_ips
 }

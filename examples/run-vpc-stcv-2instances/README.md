@@ -15,13 +15,17 @@ No provider.
 
 ## Inputs
 
-No input.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| azs | AWS availability zone list | `list` | <pre>[<br>  "us-east-1a"<br>]</pre> | no |
+| key\_name | SSH key name | `string` | `"bootstrap_key"` | no |
+| region | AWS region | `string` | `"us-east-1"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| instance\_public\_ip | n/a |
+| instance\_public\_ip | List of public IP addresses assigned to the instances, if applicable |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
