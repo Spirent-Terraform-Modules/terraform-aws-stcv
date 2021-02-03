@@ -1,5 +1,5 @@
 
-Run 2 Spirent TestCenter Virtual traffic generator instances with public and test networks.
+Run 2 Spirent TestCenter Virtual traffic generator instances with public and test networks using elastic IPs.
 
 Instances can be controlled by the Spirent TestCenter application.
 
@@ -19,6 +19,8 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| eip\_id1 | Instance 1 Elastic IP ID | `string` | `"eipalloc-123456789"` | no |
+| eip\_id2 | Instance 2 Elastic IP ID | `string` | `"eipalloc-123456789"` | no |
 | instance\_count | Number of instances to create | `number` | `2` | no |
 | key\_name | SSH key name | `string` | `"bootstrap_key"` | no |
 | mgmt\_plane\_subnet\_id | Management plane subnet ID | `string` | `"subnet-123456789"` | no |

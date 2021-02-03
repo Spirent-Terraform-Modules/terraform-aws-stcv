@@ -1,4 +1,3 @@
-
 provider "aws" {
   region = var.region
 }
@@ -23,6 +22,16 @@ variable "test_plane_subnet_id" {
   default     = "subnet-123456789"
 }
 
+variable "eip_id1" {
+  description = "Instance 1 Elastic IP ID"
+  default     = "eipalloc-123456789"
+}
+
+variable "eip_id2" {
+  description = "Instance 2 Elastic IP ID"
+  default     = "eipalloc-123456789"
+}
+
 variable "instance_count" {
   description = "Number of instances to create"
   type        = number
@@ -34,24 +43,28 @@ variable "key_name" {
   default     = "bootstrap_key"
 }
 
+# Example: Allocate elastic IPs
+# resource "aws_eip" "stcv" {
+#  count =  var.instance_count
+#  vpc      = true
+# }
 
 module "stcv" {
-  source = "../.."
-
-  vpc_id         = var.vpc_id
-  instance_count = var.instance_count
-
-  mgmt_plane_subnet_id  = var.mgmt_plane_subnet_id
+  source               = "../.."
+  vpc_id               = var.vpc_id
+  instance_count       = var.instance_count
+  mgmt_plane_subnet_id = var.mgmt_plane_subnet_id
+  mgmt_plane_eips      = [var.eip_id1, var.eip_id2]
+  # mgmt_plane_eips = aws_eip.stcv.*.id
   test_plane_subnet_ids = [var.test_plane_subnet_id]
 
   # Warning: Using all address cidr block to simplify the example. You should limit instance access.
   ingress_cidr_blocks = ["0.0.0.0/0"]
-
-  key_name       = var.key_name
-  user_data_file = "../../cloud-init.yaml"
+  key_name            = var.key_name
+  user_data_file      = "../../cloud-init.yaml"
 }
 
 output "instance_public_ips" {
   description = "List of public IP addresses assigned to the instances, if applicable"
-  value       = module.stcv.*.instance_public_ips
+  value       = module.stcv.instance_public_ips
 }

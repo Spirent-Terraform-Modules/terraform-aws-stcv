@@ -37,14 +37,20 @@ variable "instance_type" {
   default     = "m5.large"
 }
 
-variable "mgmt_plane_subnet" {
+variable "mgmt_plane_subnet_id" {
   description = "Management public AWS subnet ID"
   type        = string
 
   validation {
-    condition     = can(regex("^subnet-", var.mgmt_plane_subnet))
+    condition     = can(regex("^subnet-", var.mgmt_plane_subnet_id))
     error_message = "Please provide a valid subnet id, starting with \"subnet-\"."
   }
+}
+
+variable "mgmt_plane_eips" {
+  description = "List of management plane elastic IP IDs.  Leave empty if subnet auto assigns IPs."
+  type        = list(string)
+  default     = []
 }
 
 variable "ingress_cidr_blocks" {
@@ -52,7 +58,7 @@ variable "ingress_cidr_blocks" {
   type        = list(string)
 }
 
-variable "test_plane_subnets" {
+variable "test_plane_subnet_ids" {
   description = "Test plane AWS subnet ID list.  Each instance will have a network interface on each subnet."
   type        = list(string)
 }

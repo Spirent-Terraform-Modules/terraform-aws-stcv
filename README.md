@@ -30,8 +30,9 @@ Instances can be controlled by the Spirent TestCenter application.
 | instance\_name\_prefix | Name assigned to the instance.  An instance number will be appended to the name. | `string` | `"stcv-"` | no |
 | instance\_type | AWS instance type | `string` | `"m5.large"` | no |
 | key\_name | AWS SSH key name to assign to each instance | `string` | n/a | yes |
-| mgmt\_plane\_subnet | Management public AWS subnet ID | `string` | n/a | yes |
-| test\_plane\_subnets | Test plane AWS subnet ID list.  Each instance will have a network interface on each subnet. | `list(string)` | n/a | yes |
+| mgmt\_plane\_eips | List of management plane elastic IP IDs.  Leave empty if subnet auto assigns IPs. | `list(string)` | `[]` | no |
+| mgmt\_plane\_subnet\_id | Management public AWS subnet ID | `string` | n/a | yes |
+| test\_plane\_subnet\_ids | Test plane AWS subnet ID list.  Each instance will have a network interface on each subnet. | `list(string)` | n/a | yes |
 | user\_data\_file | File path name containing AWS user data for the instance.  Spirent TestCenter Virtual cloud-init configuration parameters are supported. | `string` | n/a | yes |
 | vpc\_id | AWS VPC ID | `string` | n/a | yes |
 
@@ -58,20 +59,20 @@ spirent:
 
 ### Parameters
 
-| Name | Description |  Type | Default 
+| Name | Description |  Type | Default
 |------|-------------|-------------|-------------
 | speed | Maximum network interface speed | 1G, 5G, 10G, 25G, 50G, 100G | 1G
-| driver | Network driver interface | sockets, dpdk | dpdk (for supported cloud provider instances) 
+| driver | Network driver interface | sockets, dpdk | dpdk (for supported cloud provider instances)
 | rxq | RX queue size for dpdk driver | 1-N | 1
 | benchmark | Turn benchmark rate mode on or off for dpdk driver| off, on | off
 | ntp | NTP server | IP address | x.x.x.x (cloud provider recommended)
 | ipv4mode | IPv4 address mode | none, static, dhcp | dhcp
-| ipaddress | IPv4 address (static mode) | IPv4 address | - 
-| netmask | IPv4 netmask (static mode) | IPv4 netmaks | -  
-| gwaddress | IPv4 gateway address (static mode) | IPv4 gateway address | - 
+| ipaddress | IPv4 address (static mode) | IPv4 address | -
+| netmask | IPv4 netmask (static mode) | IPv4 netmaks | -
+| gwaddress | IPv4 gateway address (static mode) | IPv4 gateway address | -
 | ipv6mode | IPv6 address mode | none, static, dhcp | none
-| ipv6address | IPv4 address (static mode) | IPv4 address | - 
-| ipv6prefixlen | IPv6 prefix length (static mode) | IPv4 netmaks | -  
-| ipv6gwaddress | IPv4 gateway address (static mode) | IPv6 gateway address | - 
+| ipv6address | IPv4 address (static mode) | IPv4 address | -
+| ipv6prefixlen | IPv6 prefix length (static mode) | IPv4 netmaks | -
+| ipv6gwaddress | IPv4 gateway address (static mode) | IPv6 gateway address | -
 | gvtap | Turn Gigamon gvtap agent on or off| off, on | off
 
