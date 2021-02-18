@@ -1,8 +1,19 @@
 
 Create a VPC with public and private subnets and run 2 Spirent TestCenter Virtual traffic generator instances.
 
+Instances can be controlled by the [Spirent TestCenter application](https://github.com/Spirent-terraform-Modules/terraform-aws-stc-gui).
 
-Instances can be controlled by the Spirent TestCenter application.
+## Usage
+
+To run this example you need to execute:
+
+    $ terraform init
+    $ terraform plan
+    $ terraform apply
+
+This example will create resources that will incur a cost. Run `terraform destroy` when you don't need these resources.
+
+Usage of Spirent TestCenter Virtual instances follows a Bring-Your-Own-License (BYOL) approach and is available for customers with current licenses purchased via [Spirent support](https://support.spirent.com/SpirentCSC).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
