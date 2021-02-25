@@ -1,7 +1,7 @@
-# Spirent TestCenter Virtual Terraform
+# AWS Spirent TestCenter Virtual Terraform
 
 ## Description
-Run STCv traffic generator instances with public and test networks.
+Run [STCv](https://www.spirent.com/products/testcenter-virtual-ethernet-ip-testing) traffic generator instances with public and test networks.
 
 Instances can be controlled by the [Spirent TestCenter application](https://github.com/Spirent-terraform-Modules/terraform-aws-stc-gui).
 
