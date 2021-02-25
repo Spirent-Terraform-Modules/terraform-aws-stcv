@@ -76,7 +76,7 @@ variable "test_plane_security_group_ids" {
 }
 
 variable "root_block_device" {
-  description = " Customize details about the root block device of the instance. See Block Devices below for details."
+  description = "Customize details about the root block device of the instance. See Block Devices below for details."
   type        = list(map(string))
   default     = []
 }

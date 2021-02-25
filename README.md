@@ -101,11 +101,13 @@ spirent:
 ### Root Block Device
 The root_block_device mapping supports the following:
 
-* delete_on_termination - (Optional) Whether the volume should be destroyed on instance termination. Defaults to true.
-* encrypted - (Optional) Whether to enable volume encryption. Defaults to false. Must be configured to perform drift detection.
-* iops - (Optional) Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
-* kms_key_id - (Optional) Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
-* tags - (Optional) A map of tags to assign to the device.
-* throughput - (Optional) Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
-* volume_size - (Optional) Size of the volume in gibibytes (GiB).
-* volume_type - (Optional) Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| delete_on_termination | Whether the volume should be destroyed on instance termination. | `string` | `true` | no |
+| encrypted | Whether to enable volume encryption. Must be configured to perform drift detection. | `bool` | `false` | no |
+| iops | Amount of provisioned IOPS. Only valid for volume_type of `io1`, `io2` or `gp3`. | `number` | n/a | no |
+| kms_key_id | Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection. | `string` | n/a | no |
+| tags | A map of tags to assign to the device. | `map(string)` | `{}` | no |
+| throughput | Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of `gp3`. | `number` | n/a | no |
+| volume_size | Size of the volume in gibibytes (GiB). | `number` | n/a | no |
+| volume_type | Type of volume. Valid values include `standard`, `gp2`, `gp3`, `io1`, `io2`, `sc1`, or `st1`. | `string` | `gp2` | no |
