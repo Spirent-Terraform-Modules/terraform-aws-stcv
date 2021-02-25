@@ -34,12 +34,17 @@ variable "key_name" {
   default     = "bootstrap_key"
 }
 
+variable "instance_type" {
+  description = "AWS instance type"
+  default     = "m5.large"
+}
 
 module "stcv" {
   source = "../.."
 
   vpc_id         = var.vpc_id
   instance_count = var.instance_count
+  instance_type  = var.instance_type
 
   mgmt_plane_subnet_id  = var.mgmt_plane_subnet_id
   test_plane_subnet_ids = [var.test_plane_subnet_id]
@@ -49,6 +54,14 @@ module "stcv" {
 
   key_name       = var.key_name
   user_data_file = "../../cloud-init.yaml"
+
+  root_block_device = [
+    {
+      volume_type = "standard"
+      volume_size = 2
+    }
+  ]
+
 }
 
 output "instance_public_ips" {

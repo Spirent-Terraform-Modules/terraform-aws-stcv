@@ -38,6 +38,11 @@ variable "instance_count" {
   default     = 2
 }
 
+variable "instance_type" {
+  description = "AWS instance type"
+  default     = "m5.large"
+}
+
 variable "key_name" {
   description = "SSH key name"
   default     = "bootstrap_key"
@@ -45,17 +50,18 @@ variable "key_name" {
 
 # Example: Allocate elastic IPs
 # resource "aws_eip" "stcv" {
-#  count =  var.instance_count
-#  vpc      = true
+#   count = var.instance_count
+#   vpc   = true
 # }
 
 module "stcv" {
   source               = "../.."
   vpc_id               = var.vpc_id
   instance_count       = var.instance_count
+  instance_type        = var.instance_type
   mgmt_plane_subnet_id = var.mgmt_plane_subnet_id
   mgmt_plane_eips      = [var.eip_id1, var.eip_id2]
-  # mgmt_plane_eips = aws_eip.stcv.*.id
+  # mgmt_plane_eips       = aws_eip.stcv.*.id
   test_plane_subnet_ids = [var.test_plane_subnet_id]
 
   # Warning: Using all address cidr block to simplify the example. You should limit instance access.

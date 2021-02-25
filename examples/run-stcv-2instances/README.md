@@ -27,11 +27,22 @@ Usage of Spirent TestCenter Virtual instances follows a Bring-Your-Own-License (
 
 No provider.
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| stcv | ../.. |  |
+
+## Resources
+
+No resources.
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | instance\_count | Number of instances to create | `number` | `2` | no |
+| instance\_type | AWS instance type | `string` | `"m5.large"` | no |
 | key\_name | SSH key name | `string` | `"bootstrap_key"` | no |
 | mgmt\_plane\_subnet\_id | Management plane subnet ID | `string` | `"subnet-123456789"` | no |
 | region | AWS region | `string` | `"us-west-2"` | no |
@@ -43,6 +54,5 @@ No provider.
 | Name | Description |
 |------|-------------|
 | instance\_public\_ips | List of public IP addresses assigned to the instances, if applicable |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
