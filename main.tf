@@ -16,7 +16,8 @@ data "template_file" "user_data" {
 }
 
 resource "aws_security_group" "stcv_mgmt_plane" {
-  name        = "stcv-mgmt-plane"
+  count       = length(var.mgmt_plane_security_group_ids) > 0 ? 0 : 1
+  name        = "stcv-mgmt-plane-${random_id.uid.id}"
   description = "TestCenter Security Group for management plane traffic"
 
   vpc_id = var.vpc_id
@@ -60,11 +61,11 @@ resource "aws_security_group" "stcv_mgmt_plane" {
     protocol    = "udp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
 }
 
 resource "aws_security_group" "stcv_test_plane" {
-  name        = "stcv-test-plane"
+  count       = length(var.test_plane_security_group_ids) > 0 ? 0 : 1
+  name        = "stcv-test-plane-${random_id.uid.id}"
   description = "TestCenter Security Group for test plane traffic"
 
   vpc_id = var.vpc_id
@@ -85,6 +86,10 @@ resource "aws_security_group" "stcv_test_plane" {
   }
 }
 
+resource "random_id" "uid" {
+  byte_length = 8
+}
+
 # create STCv
 resource "aws_instance" "stcv" {
   count         = var.instance_count
@@ -93,6 +98,18 @@ resource "aws_instance" "stcv" {
   key_name      = var.key_name
 
   user_data = data.template_file.user_data.rendered
+
+  dynamic "root_block_device" {
+    for_each = length(var.root_block_device) > 0 ? var.root_block_device : [{}]
+    content {
+      delete_on_termination = lookup(root_block_device.value, "delete_on_termination", true)
+      encrypted             = lookup(root_block_device.value, "encrypted", null)
+      iops                  = lookup(root_block_device.value, "iops", null)
+      kms_key_id            = lookup(root_block_device.value, "kms_key_id", null)
+      volume_size           = lookup(root_block_device.value, "volume_size", null)
+      volume_type           = lookup(root_block_device.value, "volume_type", null)
+    }
+  }
 
   network_interface {
     network_interface_id = aws_network_interface.mgmt_plane[count.index].id
@@ -111,7 +128,7 @@ locals {
 resource "aws_network_interface" "mgmt_plane" {
   count           = var.instance_count
   subnet_id       = var.mgmt_plane_subnet_id
-  security_groups = [aws_security_group.stcv_mgmt_plane.id]
+  security_groups = length(var.mgmt_plane_security_group_ids) > 0 ? var.mgmt_plane_security_group_ids : [aws_security_group.stcv_mgmt_plane[0].id]
 }
 
 resource "aws_eip_association" "mgmt_plane" {
@@ -125,7 +142,7 @@ resource "aws_eip_association" "mgmt_plane" {
 resource "aws_network_interface" "test_plane" {
   count           = var.instance_count * local.test_plane_subnet_count
   subnet_id       = var.test_plane_subnet_ids[floor(count.index / var.instance_count)]
-  security_groups = [aws_security_group.stcv_test_plane.id]
+  security_groups = length(var.test_plane_security_group_ids) > 0 ? var.test_plane_security_group_ids : [aws_security_group.stcv_test_plane[0].id]
 
   attachment {
     instance     = aws_instance.stcv[count.index % var.instance_count].id

@@ -33,10 +33,16 @@ variable "key_name" {
   default     = "bootstrap_key"
 }
 
+variable "instance_type" {
+  description = "AWS instance type"
+  default     = "m5.large"
+}
+
 module "stcv" {
   source = "../.."
 
   instance_count = 2
+  instance_type  = var.instance_type
 
   vpc_id                = module.vpc.vpc_id
   mgmt_plane_subnet_id  = module.vpc.public_subnets[0]

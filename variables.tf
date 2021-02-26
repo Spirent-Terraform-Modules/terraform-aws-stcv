@@ -54,13 +54,31 @@ variable "mgmt_plane_eips" {
 }
 
 variable "ingress_cidr_blocks" {
-  description = "List of management interface ingress IPv4/IPv6 CIDR ranges"
+  description = "List of management interface ingress IPv4/IPv6 CIDR ranges.  Set to empty list when using mgmt_plane_security_group_ids."
   type        = list(string)
+}
+
+variable "mgmt_plane_security_group_ids" {
+  description = "List of management plane security group IDs.  Leave empty to create a default security group using ingress_cidr_blocks."
+  type        = list(string)
+  default     = []
 }
 
 variable "test_plane_subnet_ids" {
   description = "Test plane AWS subnet ID list.  Each instance will have a network interface on each subnet."
   type        = list(string)
+}
+
+variable "test_plane_security_group_ids" {
+  description = "List of test plane security group IDs.  Leave empty to create a default security group."
+  type        = list(string)
+  default     = []
+}
+
+variable "root_block_device" {
+  description = "Customize details about the root block device of the instance. See Block Devices below for details."
+  type        = list(map(string))
+  default     = []
 }
 
 variable "key_name" {
