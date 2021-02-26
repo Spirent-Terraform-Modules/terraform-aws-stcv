@@ -59,7 +59,7 @@ variable "ingress_cidr_blocks" {
 }
 
 variable "mgmt_plane_security_group_ids" {
-  description = "List of management plane security group IDs.  Leave empty to create a default security group using ingress_cidir_blocks."
+  description = "List of management plane security group IDs.  Leave empty to create a default security group using ingress_cidr_blocks."
   type        = list(string)
   default     = []
 }

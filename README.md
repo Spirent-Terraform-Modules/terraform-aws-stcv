@@ -48,7 +48,7 @@ No Modules.
 | instance\_type | AWS instance type | `string` | `"m5.large"` | no |
 | key\_name | AWS SSH key name to assign to each instance | `string` | n/a | yes |
 | mgmt\_plane\_eips | List of management plane elastic IP IDs.  Leave empty if subnet auto assigns IPs. | `list(string)` | `[]` | no |
-| mgmt\_plane\_security\_group\_ids | List of management plane security group IDs.  Leave empty to create a default security group using ingress\_cidir\_blocks. | `list(string)` | `[]` | no |
+| mgmt\_plane\_security\_group\_ids | List of management plane security group IDs.  Leave empty to create a default security group using ingress\_cidr\_blocks. | `list(string)` | `[]` | no |
 | mgmt\_plane\_subnet\_id | Management public AWS subnet ID | `string` | n/a | yes |
 | root\_block\_device | Customize details about the root block device of the instance. See Block Devices below for details. | `list(map(string))` | `[]` | no |
 | test\_plane\_security\_group\_ids | List of test plane security group IDs.  Leave empty to create a default security group. | `list(string)` | `[]` | no |
