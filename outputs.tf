@@ -18,3 +18,8 @@ output "instance_private_ips" {
   description = "List of private IP addresses assigned to the instances, if applicable"
   value       = aws_instance.stcv.*.private_ip
 }
+
+output "test_plane_private_ips" {
+  description = "List of private IP addresses assigned to the test interface eth1 of instances, if applicable"
+  value       = aws_network_interface.test_plane.*.private_ips
+}
