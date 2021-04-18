@@ -23,6 +23,11 @@ variable aws_session_token {
   default     = ""
 }
 
+variable "ami" {
+  description = "The Spirent TestCenter Virtual AMI. When not specified, the latest marketplace image will be used."
+  default     = ""
+}
+
 variable "region" {
   description = "AWS region"
   default     = "us-west-2"
@@ -78,6 +83,7 @@ variable "key_name" {
 module "stcv" {
   source               = "../.."
   vpc_id               = var.vpc_id
+  ami                  = var.ami
   instance_count       = var.instance_count
   instance_type        = var.instance_type
   mgmt_plane_subnet_id = var.mgmt_plane_subnet_id
