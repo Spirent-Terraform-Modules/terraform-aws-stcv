@@ -22,7 +22,7 @@ resource "aws_security_group" "stcv_mgmt_plane" {
 
   vpc_id = var.vpc_id
 
-  # STC app
+  # STC chassis
   ingress {
     from_port   = 40004
     to_port     = 40004
@@ -30,7 +30,15 @@ resource "aws_security_group" "stcv_mgmt_plane" {
     cidr_blocks = var.ingress_cidr_blocks
   }
 
-  # STC app
+  # STC chassis ready
+  ingress {
+    from_port   = 40004
+    to_port     = 40004
+    protocol    = "udp"
+    cidr_blocks = var.ingress_cidr_blocks
+  }
+
+  # STC portgroup
   ingress {
     from_port   = 51204
     to_port     = 51204

@@ -64,6 +64,7 @@ No Modules.
 | instance\_private\_ips | List of private IP addresses assigned to the instances, if applicable |
 | instance\_public\_ips | List of public IP addresses assigned to the instances, if applicable |
 | stcv\_ami | Latest Sprient TestCenter Virtual public AMI |
+| test\_plane\_private\_ips | List of private IP addresses assigned to the test interface eth1 of instances, if applicable |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## User Data (cloud-init)
