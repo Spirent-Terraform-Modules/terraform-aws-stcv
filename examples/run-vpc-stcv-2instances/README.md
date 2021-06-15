@@ -42,6 +42,9 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| aws\_access\_key | Specifies an AWS access key associated with an IAM user or role. | `string` | `""` | no |
+| aws\_secret\_key | Specifies the secret key associated with the access key. | `string` | `""` | no |
+| aws\_session\_token | Temporary session token used to create instances | `string` | `""` | no |
 | azs | AWS availability zone list | `list` | <pre>[<br>  "us-east-1a"<br>]</pre> | no |
 | instance\_type | AWS instance type | `string` | `"m5.large"` | no |
 | key\_name | SSH key name | `string` | `"bootstrap_key"` | no |

@@ -1,9 +1,41 @@
 # AWS Spirent TestCenter Virtual Terraform
 
 ## Description
-Run [STCv](https://www.spirent.com/products/testcenter-virtual-ethernet-ip-testing) traffic generator instances with public and test networks.
+[Spirent TestCenter Virtual (STCv)](https://www.spirent.com/products/testcenter-virtual-ethernet-ip-testing) is a traffic generator used to verify network operation and performance.  This Terraform module will deploy instances of a [Spirent TestCenter Virtual AMI](https://aws.amazon.com/marketplace/pp/prodview-z2xq3jkoai2i2) to AWS EC2 for VPC testing.
 
-Instances can be controlled by the [Spirent TestCenter application](https://github.com/Spirent-terraform-Modules/terraform-aws-stc-gui).
+A controller applicaiton like the Windows Spirent TestCenter Application is needed to run traffic tests.  The applicaton may be downloaded from [support.spirent.com](http://support.spirent.com) and installed on your local PC or in the cloud (see [terraform_aws_stcgui](https://github.com/Spirent-Terraform-Modules/terraform-aws-stc-gui)).  Please note that the application and AMI version must match.
+
+For additional AWS testing details see Spirent Knowledge Base article ["Testing AWS with Spirent TestCenter Virtual"](https://support-kb.spirent.com/resources/sites/SPIRENT/content/live/FAQS/18000/FAQ18919/en_US/AWS.pdf).
+
+
+## Prerequisites
+  • AWS user credentials (environment variables AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY)
+  • Accept [Spirent TestCenter Virtual AMI](https://aws.amazon.com/marketplace/pp/prodview-z2xq3jkoai2i2) product subscription on AWS Marketplace
+  • Create an EC2 key pair on AWS for SSH access
+  • Create a cloud-init [user-data](#user-data) file
+
+
+## Terraform examples
+Terraform examples are located in the [examples](./examples) folder.
+
+### Basic usage
+```
+module "stcv" {
+  source = "git::https://github.com/Spirent-Terraform-Modules/terraform-aws-stcv"
+
+  vpc_id         = "vpc-123456789"
+  instance_count = 2
+
+  mgmt_plane_subnet_id  = "subnet-123456789"
+  test_plane_subnet_ids = ["subnet-234567891"]
+
+  ingress_cidr_blocks = ["0.0.0.1/0"]
+
+  key_name       = "bootstrap_key"
+  user_data_file = "./cloud-init.yaml"
+}
+```
+
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
