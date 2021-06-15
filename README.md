@@ -7,12 +7,11 @@ A controller applicaiton like the Windows Spirent TestCenter Application is need
 
 For additional AWS testing details see Spirent Knowledge Base article ["Testing AWS with Spirent TestCenter Virtual"](https://support-kb.spirent.com/resources/sites/SPIRENT/content/live/FAQS/18000/FAQ18919/en_US/AWS.pdf).
 
-
 ## Prerequisites
-  • AWS user credentials (environment variables AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY)
-  • Accept [Spirent TestCenter Virtual AMI](https://aws.amazon.com/marketplace/pp/prodview-z2xq3jkoai2i2) product subscription on AWS Marketplace
-  • Create an EC2 key pair on AWS for SSH access
-  • Create a cloud-init [user-data](#user-data) file
+- AWS user credentials (environment variables AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY)
+- Accept [Spirent TestCenter Virtual AMI](https://aws.amazon.com/marketplace/pp/prodview-z2xq3jkoai2i2) product subscription on AWS Marketplace
+- Create an EC2 key pair on AWS for SSH access
+- Create a cloud-init [user-data](#user-data) file
 
 
 ## Terraform examples
