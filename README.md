@@ -11,7 +11,7 @@ For additional AWS testing information see Spirent Knowledge Base article ["Test
 - AWS user credentials (environment variables AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY)
 - Accept [Spirent TestCenter Virtual AMI](https://aws.amazon.com/marketplace/pp/prodview-z2xq3jkoai2i2) product subscription on AWS Marketplace
 - Create an EC2 key pair on AWS for SSH access
-- Create a cloud-init [user-data](##user-data) file
+- Create a cloud-init [user-data](#user-data-cloud-init) file
 
 
 ## Terraform examples
