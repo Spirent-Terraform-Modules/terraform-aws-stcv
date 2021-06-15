@@ -28,7 +28,7 @@ module "stcv" {
   mgmt_plane_subnet_id  = "subnet-123456789"
   test_plane_subnet_ids = ["subnet-234567891"]
 
-  ingress_cidr_blocks = ["0.0.0.1/0"]
+  ingress_cidr_blocks = ["0.0.0.0/0"]
 
   key_name       = "bootstrap_key"
   user_data_file = "./cloud-init.yaml"

@@ -13,6 +13,9 @@ To run this example you need to execute:
 
 This example will create resources that will incur a cost. Run `terraform destroy` when you don't need these resources.
 
+**Note:** [Prerequisites](../../README.md#Prerequisites) are also required.
+
+
 Usage of Spirent TestCenter Virtual instances follows a Bring-Your-Own-License (BYOL) approach and is available for customers with current licenses purchased via [Spirent support](https://support.spirent.com/SpirentCSC).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
