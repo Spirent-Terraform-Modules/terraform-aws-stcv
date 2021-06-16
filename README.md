@@ -3,7 +3,7 @@
 ## Description
 [Spirent TestCenter Virtual (STCv)](https://www.spirent.com/products/testcenter-virtual-ethernet-ip-testing) is a traffic generator used to verify network operation and performance.  This Terraform module will deploy instances of a [Spirent TestCenter Virtual AMI](https://aws.amazon.com/marketplace/pp/prodview-z2xq3jkoai2i2) to AWS EC2 for VPC testing.
 
-A controller application like the *Spirent TestCenter Application* is needed to run traffic tests.  Download the installer while logged in to [support.spirent.com](http://support.spirent.com) on the *Downloads* page with filter set to Product Line=*Spirent TestCenter*, Categories=*Applications*, and Operationg System=*Windows 64-bit*.  Install on your local PC or in the cloud (see [terraform-aws-stc-gui](https://github.com/Spirent-Terraform-Modules/terraform-aws-stc-gui)).  Please note that the application and AMI version must match.
+A controller application like the *Spirent TestCenter Application* is needed to run traffic tests.  Log on to [support.spirent.com](http://support.spirent.com) to download the application installer. On the *Downloads* page set the filter to Product Line=*Spirent TestCenter*, Categories=*Applications*, and Operating System=*Windows 64-bit* to find a *Spirent TestCenter Application* download link.  Install on your local PC or in the cloud (see [terraform-aws-stc-gui](https://github.com/Spirent-Terraform-Modules/terraform-aws-stc-gui)).  Please ensure that the application and AMI version match.
 
 For additional AWS testing information see Spirent Knowledge Base article ["Testing AWS with Spirent TestCenter Virtual"](https://support-kb.spirent.com/resources/sites/SPIRENT/content/live/FAQS/18000/FAQ18919/en_US/AWS.pdf).
 
