@@ -5,7 +5,7 @@
 
 A controller application like the *Spirent TestCenter Application* is needed to run traffic tests.  Log on to [support.spirent.com](http://support.spirent.com) to download the application installer. On the *Downloads* page set the filter to Product Line=*Spirent TestCenter*, Categories=*Applications*, and Operating System=*Windows 64-bit* to find a *Spirent TestCenter Application* download link.  Install on your local PC or in the cloud (see [terraform-aws-stc-gui](https://github.com/Spirent-Terraform-Modules/terraform-aws-stc-gui)).  Please ensure that the application and AMI version match.
 
-For additional AWS testing information see Spirent Knowledge Base article ["Testing AWS with Spirent TestCenter Virtual"](https://support-kb.spirent.com/resources/sites/SPIRENT/content/live/FAQS/18000/FAQ18919/en_US/AWS.pdf).
+For additional AWS testing information see Spirent Knowledge Base article ["Spirent TestCenter Virtual AWS Machine Image Quick Start Guide"](https://support.spirent.com/SpirentCSC/SC_KnowledgeView?Id=DOC11879).
 
 ## Prerequisites
 - AWS user credentials (environment variables AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY)
