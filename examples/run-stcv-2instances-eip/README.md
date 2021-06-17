@@ -13,6 +13,8 @@ To run this example you need to execute:
 
 This example will create resources that will incur a cost. Run `terraform destroy` when you don't need these resources.
 
+**Note:** [Prerequisites](../../README.md#Prerequisites) are also required.
+
 Usage of Spirent TestCenter Virtual instances follows a Bring-Your-Own-License (BYOL) approach and is available for customers with current licenses purchased via [Spirent support](https://support.spirent.com/SpirentCSC).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
@@ -41,6 +43,10 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| ami | The Spirent TestCenter Virtual AMI. When not specified, the latest marketplace image will be used. | `string` | `""` | no |
+| aws\_access\_key | Specifies an AWS access key associated with an IAM user or role. | `string` | `""` | no |
+| aws\_secret\_key | Specifies the secret key associated with the access key. | `string` | `""` | no |
+| aws\_session\_token | Temporary session token used to create instances | `string` | `""` | no |
 | eip\_id1 | Instance 1 Elastic IP ID | `string` | `"eipalloc-123456789"` | no |
 | eip\_id2 | Instance 2 Elastic IP ID | `string` | `"eipalloc-123456789"` | no |
 | instance\_count | Number of instances to create | `number` | `2` | no |
@@ -56,5 +62,6 @@ No resources.
 | Name | Description |
 |------|-------------|
 | instance\_public\_ips | List of public IP addresses assigned to the instances, if applicable |
+| test\_plane\_private\_ips | List of private IP addresses assigned to the test interface eth1 of instances, if applicable |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

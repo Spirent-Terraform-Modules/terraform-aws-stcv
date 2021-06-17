@@ -13,6 +13,9 @@ To run this example you need to execute:
 
 This example will create resources that will incur a cost. Run `terraform destroy` when you don't need these resources.
 
+**Note:** [Prerequisites](../../README.md#Prerequisites) are also required.
+
+
 Usage of Spirent TestCenter Virtual instances follows a Bring-Your-Own-License (BYOL) approach and is available for customers with current licenses purchased via [Spirent support](https://support.spirent.com/SpirentCSC).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
@@ -42,6 +45,9 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| aws\_access\_key | Specifies an AWS access key associated with an IAM user or role. | `string` | `""` | no |
+| aws\_secret\_key | Specifies the secret key associated with the access key. | `string` | `""` | no |
+| aws\_session\_token | Temporary session token used to create instances | `string` | `""` | no |
 | azs | AWS availability zone list | `list` | <pre>[<br>  "us-east-1a"<br>]</pre> | no |
 | instance\_type | AWS instance type | `string` | `"m5.large"` | no |
 | key\_name | SSH key name | `string` | `"bootstrap_key"` | no |
