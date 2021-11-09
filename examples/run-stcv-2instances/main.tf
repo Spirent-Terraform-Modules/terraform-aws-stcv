@@ -79,7 +79,7 @@ module "stcv" {
   root_block_device = [
     {
       volume_type = "standard"
-      volume_size = 2
+      volume_size = 4
     }
   ]
 
