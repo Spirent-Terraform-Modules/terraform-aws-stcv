@@ -38,6 +38,14 @@ resource "aws_security_group" "stcv_mgmt_plane" {
     cidr_blocks = var.ingress_cidr_blocks
   }
 
+  # STC chassis (QUIC)
+  ingress {
+    from_port   = 40005
+    to_port     = 40005
+    protocol    = "udp"
+    cidr_blocks = var.ingress_cidr_blocks
+  }
+
   # STC portgroup
   ingress {
     from_port   = 51204
