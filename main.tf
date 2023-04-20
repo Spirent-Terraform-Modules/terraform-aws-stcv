@@ -54,6 +54,14 @@ resource "aws_security_group" "stcv_mgmt_plane" {
     cidr_blocks = var.ingress_cidr_blocks
   }
 
+  # STC portgroup (QUIC)
+  ingress {
+    from_port   = 51204
+    to_port     = 51204
+    protocol    = "udp"
+    cidr_blocks = var.ingress_cidr_blocks
+  }
+
   # SSH
   ingress {
     from_port   = 22
@@ -67,6 +75,14 @@ resource "aws_security_group" "stcv_mgmt_plane" {
     from_port   = 49100
     to_port     = 65535
     protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # STCv to GUI/BLL (QUIC)
+  egress {
+    from_port   = 49100
+    to_port     = 65535
+    protocol    = "udp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
