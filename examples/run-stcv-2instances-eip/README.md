@@ -1,7 +1,7 @@
 
-Run 2 Spirent TestCenter Virtual traffic generator instances with public and test networks using elastic IPs.
+Run 2 TestCenter Virtual traffic generator instances with public and test networks using elastic IPs.
 
-Instances can be controlled by the [Spirent TestCenter application](https://github.com/Spirent-terraform-Modules/terraform-aws-stc-gui).
+Instances can be controlled by the [TestCenter application](https://github.com/Spirent-terraform-Modules/terraform-aws-stc-gui).
 
 ## Usage
 
@@ -15,7 +15,7 @@ This example will create resources that will incur a cost. Run `terraform destro
 
 **Note:** [Prerequisites](../../README.md#Prerequisites) are also required.
 
-Usage of Spirent TestCenter Virtual instances follows a Bring-Your-Own-License (BYOL) approach and is available for customers with current licenses purchased via [Spirent support](https://support.spirent.com/SpirentCSC).
+Usage of TestCenter Virtual instances follows a Bring-Your-Own-License (BYOL) approach and is available for customers with current licenses purchased via [VIAVI support](https://www.viavisolutions.com/en-us/support/customer-support/technical-support).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -43,7 +43,7 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| ami | The Spirent TestCenter Virtual AMI. When not specified, the latest marketplace image will be used. | `string` | `""` | no |
+| ami | The TestCenter Virtual AMI. When not specified, the latest marketplace image will be used. | `string` | `""` | no |
 | aws\_access\_key | Specifies an AWS access key associated with an IAM user or role. | `string` | `""` | no |
 | aws\_secret\_key | Specifies the secret key associated with the access key. | `string` | `""` | no |
 | aws\_session\_token | Temporary session token used to create instances | `string` | `""` | no |

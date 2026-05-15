@@ -1,15 +1,15 @@
-# AWS Spirent TestCenter Virtual Terraform
+# AWS TestCenter Virtual Terraform
 
 ## Description
-[Spirent TestCenter Virtual (STCv)](https://www.spirent.com/products/testcenter-virtual-ethernet-ip-testing) is a traffic generator used to verify network operation and performance.  This Terraform module will deploy instances of a [Spirent TestCenter Virtual AMI](https://aws.amazon.com/marketplace/pp/prodview-z2xq3jkoai2i2) to AWS EC2 for VPC testing.
+[TestCenter Virtual (STCv)](https://www.viavisolutions.com/en-us/products/testcenter-virtual) is a traffic generator used to verify network operation and performance.  This Terraform module will deploy instances of a [TestCenter Virtual AMI](https://aws.amazon.com/marketplace/pp/prodview-z2xq3jkoai2i2) to AWS EC2 for VPC testing.
 
-A controller application like the *Spirent TestCenter Application* is needed to run traffic tests.  Log on to [support.spirent.com](http://support.spirent.com) to download the application installer. On the *Downloads* page set the filter to Product Line=*Spirent TestCenter*, Categories=*Applications*, and Operating System=*Windows 64-bit* to find a *Spirent TestCenter Application* download link.  Install on your local PC or in the cloud (see [terraform-aws-stc-gui](https://github.com/Spirent-Terraform-Modules/terraform-aws-stc-gui)).  Please ensure that the application and AMI version match.
+A controller application like the *TestCenter Application* is needed to run traffic tests.  Log on to [VIAVI support](https://www.viavisolutions.com/en-us/support/customer-support/technical-support) to download the application installer. On the *Downloads* page set the filter to Product Line=*TestCenter*, Categories=*Applications*, and Operating System=*Windows 64-bit* to find a *TestCenter Application* download link.  Install on your local PC or in the cloud (see [terraform-aws-stc-gui](https://github.com/Spirent-Terraform-Modules/terraform-aws-stc-gui)).  Please ensure that the application and AMI version match.
 
-For additional AWS testing information see Spirent Knowledge Base article ["Spirent TestCenter Virtual AWS Machine Image Quick Start Guide"](https://support.spirent.com/SpirentCSC/SC_KnowledgeView?Id=DOC11879).
+For additional AWS testing information see VIAVI Knowledge Base article ["TestCenter Virtual AWS Machine Image Quick Start Guide"](https://www.viavisolutions.com/en-us/support/customer-support/technical-support).
 
 ## Prerequisites
 - AWS user credentials (environment variables AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY)
-- Accept [Spirent TestCenter Virtual AMI](https://aws.amazon.com/marketplace/pp/prodview-z2xq3jkoai2i2) product subscription on AWS Marketplace
+- Accept [TestCenter Virtual AMI](https://aws.amazon.com/marketplace/pp/prodview-z2xq3jkoai2i2) product subscription on AWS Marketplace
 - Create an EC2 key pair on AWS for SSH access
 - Create a cloud-init [user-data](#user-data-cloud-init) file
 
@@ -72,7 +72,7 @@ No Modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| ami | The Spirent TestCenter Virtual AMI. When not specified, the latest marketplace image will be used. | `string` | `""` | no |
+| ami | The TestCenter Virtual AMI. When not specified, the latest marketplace image will be used. | `string` | `""` | no |
 | ingress\_cidr\_blocks | List of management interface ingress IPv4/IPv6 CIDR ranges.  Set to empty list when using mgmt\_plane\_security\_group\_ids. | `list(string)` | n/a | yes |
 | instance\_count | Number of instances to create | `number` | `2` | no |
 | instance\_name\_prefix | Name assigned to the instance.  An instance number will be appended to the name. | `string` | `"stcv-"` | no |
@@ -84,7 +84,7 @@ No Modules.
 | root\_block\_device | Customize details about the root block device of the instance. See Block Devices below for details. | `list(map(string))` | `[]` | no |
 | test\_plane\_security\_group\_ids | List of test plane security group IDs.  Leave empty to create a default security group. | `list(string)` | `[]` | no |
 | test\_plane\_subnet\_ids | Test plane AWS subnet ID list.  Each instance will have a network interface on each subnet. | `list(string)` | n/a | yes |
-| user\_data\_file | File path name containing AWS user data for the instance.  Spirent TestCenter Virtual cloud-init configuration parameters are supported. | `string` | n/a | yes |
+| user\_data\_file | File path name containing AWS user data for the instance.  TestCenter Virtual cloud-init configuration parameters are supported. | `string` | n/a | yes |
 | vpc\_id | AWS VPC ID | `string` | n/a | yes |
 
 ## Outputs
