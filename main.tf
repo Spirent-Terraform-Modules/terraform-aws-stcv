@@ -1,5 +1,5 @@
 
-# find latest public Spirent TestCenter Virtual AMI
+# find latest public TestCenter Virtual AMI
 data "aws_ami" "stcv" {
   owners           = ["679593333241"]
   most_recent      = true

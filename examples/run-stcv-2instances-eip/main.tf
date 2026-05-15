@@ -24,7 +24,7 @@ variable "aws_session_token" {
 }
 
 variable "ami" {
-  description = "The Spirent TestCenter Virtual AMI. When not specified, the latest marketplace image will be used."
+  description = "The TestCenter Virtual AMI. When not specified, the latest marketplace image will be used."
   default     = ""
 }
 

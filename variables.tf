@@ -1,11 +1,11 @@
 variable "ami" {
-  description = "The Spirent TestCenter Virtual AMI. When not specified, the latest marketplace image will be used."
+  description = "The TestCenter Virtual AMI. When not specified, the latest marketplace image will be used."
   type        = string
   default     = ""
 
   validation {
     condition     = var.ami == "" || can(regex("^ami-", var.ami))
-    error_message = "Please provide a valid ami id, starting with \"ami-\". or leave blank for latest Spirent TestCenter Virtual AMI."
+    error_message = "Please provide a valid ami id, starting with \"ami-\". or leave blank for latest TestCenter Virtual AMI."
   }
 }
 
@@ -87,6 +87,6 @@ variable "key_name" {
 }
 
 variable "user_data_file" {
-  description = "File path name containing AWS user data for the instance.  Spirent TestCenter Virtual cloud-init configuration parameters are supported."
+  description = "File path name containing AWS user data for the instance.  TestCenter Virtual cloud-init configuration parameters are supported."
   type        = string
 }
